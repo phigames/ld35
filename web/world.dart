@@ -1,9 +1,9 @@
 part of hubris;
 
+num centerX, centerY;
 class World {
 
   num radius;
-  num centerX, centerY;
   List<Platform> platforms;
 
   World() {
@@ -11,7 +11,7 @@ class World {
     centerX = screenWidth / 2;
     centerY = screenHeight * 0.75 - radius;
     platforms = new List<Platform>();
-    platforms.add(new Platform(PI/2, PI/2 + 0.1, 700));
+    platforms.add(new Platform(PI/2, PI/2 + 0.5, 700));
   }
 
   void update() {
@@ -22,6 +22,7 @@ class World {
     bufferContext.fillStyle = '#B56900';
     bufferContext.fillRect(0, 0, screenWidth, screenHeight);
     bufferContext.fillStyle = '#4FB8FF';
+    bufferContext.beginPath();
     bufferContext.arc(centerX, centerY, radius, 0, 2 * PI);
     bufferContext.fill();
     for (int i = 0; i < platforms.length; i++) {
@@ -38,12 +39,13 @@ class Platform {
   List<PlatformCircle> circles;
 
   Platform(this.angleLeft, this.angleRight, this.radius) {
-    num parts = 0;
     circles = new List<PlatformCircle>();
-    for (int i = 1; i < 5; i++) { // parts
-      parts += i;
+    num platformWidth = angleRight - angleLeft;
+    num partWidth = 0.07;
+    int parts = platformWidth ~/ partWidth;
+    for (int i = 0; i < parts; i++) { // parts
       for (int j = 0; j < 2; j++) { // n circles
-        circles.add(new PlatformCircle((angleLeft + (angleRight - angleLeft))/parts*i, radius + 50, 30));
+        circles.add(new PlatformCircle(angleLeft + partWidth * i + random.nextDouble() * partWidth, radius + random.nextDouble() * 20 + 10, random.nextDouble() * 20 + 20));
       }
     }
   }
@@ -66,8 +68,9 @@ class PlatformCircle {
   }
 
   void draw() {
-    bufferContext.arc(cos(angle)*radius, sin(angle)*radius, 5, 0, 2 * PI);
+    bufferContext.beginPath();
     bufferContext.fillStyle = '#F00';
+    bufferContext.arc(cos(angle)*radius + centerX, sin(angle)*radius + centerY, radiusCircle, 0, 2 * PI);
     bufferContext.fill();
   }
 

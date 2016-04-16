@@ -4,11 +4,12 @@ import 'dart:html';
 import 'dart:math';
 
 part 'world.dart';
+part 'player.dart';
 
 int screenWidth, screenHeight;
 CanvasElement canvas, buffer;
 CanvasRenderingContext2D canvasContext, bufferContext;
-num cameraX, cameraY;
+Random random;
 World world;
 num lastUpdate;
 
@@ -19,6 +20,7 @@ void main() {
   buffer = new CanvasElement(width: screenWidth, height: screenHeight);
   canvasContext = canvas.context2D;
   bufferContext = buffer.context2D;
+  random = new Random();
   world = new World();
   lastUpdate = -1;
   requestFrame();
