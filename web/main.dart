@@ -1,8 +1,8 @@
-// Copyright (c) 2016, <your name>. All rights reserved. Use of this source code
-// is governed by a BSD-style license that can be found in the LICENSE file.
+library hubris;
 
 import 'dart:html';
+import 'dart:math';
 
 void main() {
-  querySelector('#output').text = 'Your Dart app is running.';
+
 }
