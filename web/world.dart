@@ -5,6 +5,7 @@ class World {
   num radius;
   num centerX, centerY;
   List<Platform> platforms;
+  Player player;
 
   World() {
     radius = 800;
@@ -12,10 +13,11 @@ class World {
     centerY = screenHeight * 0.75 - radius;
     platforms = new List<Platform>();
     platforms.add(new Platform(PI/2, PI/2 + 0.5, 700));
+    player = new Player(PI/2, radius);
   }
 
   void update() {
-
+    player.update();
   }
 
   void draw() {
@@ -28,6 +30,7 @@ class World {
     for (int i = 0; i < platforms.length; i++) {
       platforms[i].draw();
     }
+    player.draw();
   }
 
 }
