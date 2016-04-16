@@ -11,7 +11,7 @@ class World {
     centerX = screenWidth / 2;
     centerY = screenHeight * 0.75 - radius;
     platforms = new List<Platform>();
-    platforms.add(new Platform(0, 0.5));
+    platforms.add(new Platform(PI/2, PI/2 + 0.1, 700));
   }
 
   void update() {
@@ -27,7 +27,6 @@ class World {
     for (int i = 0; i < platforms.length; i++) {
       platforms[i].draw();
     }
-    print('draw');
   }
 
 }
@@ -36,19 +35,40 @@ class Platform {
 
   num angleLeft, angleRight;
   num radius;
+  List<PlatformCircle> circles;
 
   Platform(this.angleLeft, this.angleRight, this.radius) {
-
+    num parts = 0;
+    circles = new List<PlatformCircle>();
+    for (int i = 1; i < 5; i++) { // parts
+      parts += i;
+      for (int j = 0; j < 2; j++) { // n circles
+        circles.add(new PlatformCircle((angleLeft + (angleRight - angleLeft))/parts*i, radius + 50, 30));
+      }
+    }
   }
 
   void draw() {
-
+    for (int i = 0; i < circles.length; i++) {
+      circles[i].draw();
+    }
   }
-
 }
 
 class PlatformCircle {
 
+  num angle;
+  num radius;
+  num radiusCircle;
 
+  PlatformCircle(this.angle, this.radius, this.radiusCircle) {
+
+  }
+
+  void draw() {
+    bufferContext.arc(cos(angle)*radius, sin(angle)*radius, 5, 0, 2 * PI);
+    bufferContext.fillStyle = '#F00';
+    bufferContext.fill();
+  }
 
 }
