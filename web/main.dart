@@ -5,6 +5,7 @@ import 'dart:math';
 
 part 'world.dart';
 part 'player.dart';
+part 'platform.dart';
 
 int screenWidth, screenHeight;
 CanvasElement canvas, buffer;
