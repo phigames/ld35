@@ -35,13 +35,20 @@ class World {
 class Platform {
 
   num angleLeft, angleRight;
+  num radius;
 
-  Platform(this.angleLeft, this.angleRight) {
+  Platform(this.angleLeft, this.angleRight, this.radius) {
 
   }
 
   void draw() {
 
   }
+
+}
+
+class PlatformCircle {
+
+
 
 }
