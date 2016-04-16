@@ -4,6 +4,7 @@ class World {
 
   num radius;
   num centerX, centerY;
+  num offsetAngle;
   List<Platform> platforms;
   Player player;
 
@@ -11,8 +12,10 @@ class World {
     radius = 800;
     centerX = screenWidth / 2;
     centerY = screenHeight * 0.75 - radius;
+    offsetAngle = 0;
     platforms = new List<Platform>();
-    platforms.add(new Platform(PI/2, PI/2 + 0.5, 700));
+    platforms.add(new Platform(PI/2, PI/2 + 0.2, 700));
+    platforms.add(new Platform(PI/2 - 0.2, PI/2 - 0.1, 600));
     player = new Player(PI/2, radius);
   }
 

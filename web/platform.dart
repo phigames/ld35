@@ -48,8 +48,6 @@ class PlatformCircle {
     color += g.toRadixString(16);
     if (b < 0x10) color += '0';
     color += b.toRadixString(16);
-    print('r:$r g:$g b:$b');
-    print(color);
   }
 
   void draw() {
