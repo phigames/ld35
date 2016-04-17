@@ -45,9 +45,13 @@ class IntroState extends GameState {
     phaseTime++;
     fogTime++;
     if (input.spaceKey) {
-      phase++;
-      phaseTime = 0;
-      input.spaceKey = false;
+      if (phase < 10) {
+        phase++;
+        phaseTime = 0;
+        input.spaceKey = false;
+      } else {
+        gameState = new WorldState();
+      }
     }
   }
 
@@ -55,9 +59,10 @@ class IntroState extends GameState {
     if (phase == 0) {
       bufferContext.fillStyle = '#4FB8FF';
       bufferContext.fillRect(0, 0, screenWidth, screenHeight);
-      bufferContext.fillStyle = '#B56900';
+      bufferContext.fillStyle = '#A06239';
       bufferContext.beginPath();
       bufferContext.arc(screenWidth / 2, screenHeight / 2, 100, 0, 2 * PI);
+      bufferContext.closePath();
       bufferContext.fill();
       bufferContext.save();
       bufferContext.translate(screenWidth / 2, screenHeight / 2);
@@ -73,9 +78,10 @@ class IntroState extends GameState {
     } else if (phase == 1) {
       bufferContext.fillStyle = '#4FB8FF';
       bufferContext.fillRect(0, 0, screenWidth, screenHeight);
-      bufferContext.fillStyle = '#B56900';
+      bufferContext.fillStyle = '#A06239';
       bufferContext.beginPath();
       bufferContext.arc(screenWidth / 2, screenHeight / 2, 100, 0, 2 * PI);
+      bufferContext.closePath();
       bufferContext.fill();
       bufferContext.save();
       bufferContext.translate(screenWidth / 2, screenHeight / 2);
@@ -91,9 +97,10 @@ class IntroState extends GameState {
     } else if (phase == 2) {
       bufferContext.fillStyle = '#4FB8FF';
       bufferContext.fillRect(0, 0, screenWidth, screenHeight);
-      bufferContext.fillStyle = '#B56900';
+      bufferContext.fillStyle = '#A06239';
       bufferContext.beginPath();
       bufferContext.arc(screenWidth / 2, screenHeight / 2 + min(phaseTime, 100) * 21.5, 100 + min(phaseTime, 100) * 20, 0, 2 * PI);
+      bufferContext.closePath();
       bufferContext.fill();
       bufferContext.fillStyle = '#000';
       bufferContext.font = 'bold 30px Forum';
@@ -105,9 +112,10 @@ class IntroState extends GameState {
     } else if (phase == 3) {
       bufferContext.fillStyle = '#4FB8FF';
       bufferContext.fillRect(0, 0, screenWidth, screenHeight);
-      bufferContext.fillStyle = '#B56900';
+      bufferContext.fillStyle = '#A06239';
       bufferContext.beginPath();
       bufferContext.arc(screenWidth / 2, screenHeight / 2 + 2150, 2100, 0, 2 * PI);
+      bufferContext.closePath();
       bufferContext.fill();
       if (phaseTime <= 50) {
         bufferContext.globalAlpha = phaseTime / 50;
@@ -125,12 +133,13 @@ class IntroState extends GameState {
     } else if (phase == 4) {
       bufferContext.fillStyle = '#4FB8FF';
       bufferContext.fillRect(0, 0, screenWidth, screenHeight);
-      bufferContext.fillStyle = '#B56900';
+      bufferContext.fillStyle = '#A06239';
       bufferContext.beginPath();
       bufferContext.arc(screenWidth / 2, screenHeight / 2 + 2150, 2100, 0, 2 * PI);
+      bufferContext.closePath();
       bufferContext.fill();
       bufferContext.drawImage(tower, 0, 0);
-      bufferContext.drawImage(fog, sin(fogTime / 200) * 100 - 100, 0);
+      bufferContext.drawImage(fog, sin(fogTime / 100) * 100 - 100, 0);
       if (phaseTime <= 50) {
         bufferContext.drawImage(god, screenWidth - phaseTime * 6, screenHeight - 300);
       } else {
@@ -144,9 +153,10 @@ class IntroState extends GameState {
     } else if (phase == 5) {
       bufferContext.fillStyle = '#4FB8FF';
       bufferContext.fillRect(0, 0, screenWidth, screenHeight);
-      bufferContext.fillStyle = '#B56900';
+      bufferContext.fillStyle = '#A06239';
       bufferContext.beginPath();
       bufferContext.arc(screenWidth / 2, screenHeight / 2 + max(100 - phaseTime, 0) * 21.5, 100 + max(100 - phaseTime, 0) * 20, 0, 2 * PI);
+      bufferContext.closePath();
       bufferContext.fill();
       if (phaseTime <= 50) {
         bufferContext.drawImage(god, screenWidth - (50 - phaseTime) * 6, screenHeight - 300);
@@ -170,9 +180,10 @@ class IntroState extends GameState {
     } else if (phase == 5) {
       bufferContext.fillStyle = '#4FB8FF';
       bufferContext.fillRect(0, 0, screenWidth, screenHeight);
-      bufferContext.fillStyle = '#B56900';
+      bufferContext.fillStyle = '#A06239';
       bufferContext.beginPath();
       bufferContext.arc(screenWidth / 2, screenHeight / 2 + max(100 - phaseTime, 0) * 21.5, 100 + max(100 - phaseTime, 0) * 20, 0, 2 * PI);
+      bufferContext.closePath();
       bufferContext.fill();
       if (phaseTime <= 50) {
         bufferContext.drawImage(god, screenWidth - (50 - phaseTime) * 6, screenHeight - 300);
@@ -193,25 +204,28 @@ class IntroState extends GameState {
       if (phaseTime <= 50) {
         bufferContext.fillStyle = '#4FB8FF';
         bufferContext.fillRect(0, 0, screenWidth, screenHeight);
-        bufferContext.fillStyle = '#B56900';
+        bufferContext.fillStyle = '#A06239';
         bufferContext.beginPath();
         num t = phaseTime * phaseTime * 0.2;
         bufferContext.arc(screenWidth / 2, screenHeight / 2 + t * 20.2, 100 + t * 20, 0, 2 * PI);
+        bufferContext.closePath();
         bufferContext.fill();
       } else if (phaseTime <= 100) {
-        bufferContext.fillStyle = '#B56900';
+        bufferContext.fillStyle = '#A06239';
         bufferContext.fillRect(0, 0, screenWidth, screenHeight);
         bufferContext.fillStyle = '#4FB8FF';
         bufferContext.beginPath();
         num t = (100 - phaseTime) * (100 - phaseTime) * 0.2;
         bufferContext.arc(screenWidth / 2, screenHeight / 2 - t * 20.2, 100 + t * 20, 0, 2 * PI);
+        bufferContext.closePath();
         bufferContext.fill();
       } else {
-        bufferContext.fillStyle = '#B56900';
+        bufferContext.fillStyle = '#A06239';
         bufferContext.fillRect(0, 0, screenWidth, screenHeight);
         bufferContext.fillStyle = '#4FB8FF';
         bufferContext.beginPath();
         bufferContext.arc(screenWidth / 2, screenHeight / 2, 100, 0, 2 * PI);
+        bufferContext.closePath();
         bufferContext.fill();
         bufferContext.save();
         bufferContext.translate(screenWidth / 2, screenHeight / 2);
@@ -228,11 +242,12 @@ class IntroState extends GameState {
 
 
     } else if (phase == 7) {
-      bufferContext.fillStyle = '#B56900';
+      bufferContext.fillStyle = '#A06239';
       bufferContext.fillRect(0, 0, screenWidth, screenHeight);
       bufferContext.fillStyle = '#4FB8FF';
       bufferContext.beginPath();
       bufferContext.arc(screenWidth / 2, screenHeight / 2, 100, 0, 2 * PI);
+      bufferContext.closePath();
       bufferContext.fill();
       bufferContext.save();
       bufferContext.translate(screenWidth / 2, screenHeight / 2);
@@ -248,11 +263,12 @@ class IntroState extends GameState {
 
 
     } else if (phase == 8) {
-      bufferContext.fillStyle = '#B56900';
+      bufferContext.fillStyle = '#A06239';
       bufferContext.fillRect(0, 0, screenWidth, screenHeight);
       bufferContext.fillStyle = '#4FB8FF';
       bufferContext.beginPath();
       bufferContext.arc(screenWidth / 2, screenHeight / 2, 100, 0, 2 * PI);
+      bufferContext.closePath();
       bufferContext.fill();
       bufferContext.save();
       bufferContext.translate(screenWidth / 2, screenHeight / 2);
@@ -271,11 +287,12 @@ class IntroState extends GameState {
 
 
     } else if (phase == 9) {
-      bufferContext.fillStyle = '#B56900';
+      bufferContext.fillStyle = '#A06239';
       bufferContext.fillRect(0, 0, screenWidth, screenHeight);
       bufferContext.fillStyle = '#4FB8FF';
       bufferContext.beginPath();
       bufferContext.arc(screenWidth / 2, screenHeight / 2, 100, 0, 2 * PI);
+      bufferContext.closePath();
       bufferContext.fill();
       bufferContext.save();
       bufferContext.translate(screenWidth / 2, screenHeight / 2);
@@ -294,11 +311,12 @@ class IntroState extends GameState {
 
 
     } else if (phase == 10) {
-      bufferContext.fillStyle = '#B56900';
+      bufferContext.fillStyle = '#A06239';
       bufferContext.fillRect(0, 0, screenWidth, screenHeight);
       bufferContext.fillStyle = '#4FB8FF';
       bufferContext.beginPath();
       bufferContext.arc(screenWidth / 2, screenHeight / 2 - min(phaseTime, 100) * 6.2, 100 + min(phaseTime, 100) * 7, 0, 2 * PI);
+      bufferContext.closePath();
       bufferContext.fill();
       if (phaseTime > 100) {
         gameState = new WorldState();

@@ -9,6 +9,7 @@ part 'platform.dart';
 part 'input.dart';
 part 'gamestate.dart';
 part 'resources.dart';
+part 'stone.dart';
 
 int screenWidth, screenHeight;
 CanvasElement canvas, buffer;

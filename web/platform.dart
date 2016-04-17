@@ -5,21 +5,46 @@ class Platform {
   num angleLeft, angleRight;
   num radius;
   List<PlatformCircle> circles;
+  int type;
 
-  Platform(this.angleLeft, this.angleRight, this.radius) {
+  Platform(this.angleLeft, this.angleRight, this.radius, this.type) {
     circles = new List<PlatformCircle>();
     num platformWidth = angleRight - angleLeft;
     num partWidth = 0.04;
     int parts = platformWidth ~/ partWidth;
+    int r, g, b;
+    if (type == 1) {
+      r = 0x00;
+      g = 0xAA;
+      b = 0x0E;
+    } else if (type == 2) {
+      r = 0xFD;
+      g = 0xFD;
+      b = 0xFD;
+    }
     for (int i = 0; i < parts; i++) { // parts
       for (int j = 0; j < 2; j++) { // n circles
-        circles.add(new PlatformCircle(angleLeft + partWidth * i + random.nextDouble() * partWidth, radius + random.nextDouble() * 30 + 10, random.nextDouble() * 10 + 20, 0xFD, 0xFD, 0xFD));
+        circles.add(new PlatformCircle(angleLeft + partWidth * i + partWidth / 2, radius + random.nextDouble() * 30 + 10, random.nextDouble() * 10 + 15, r, g, b));
       }
     }
+    circles.add(new PlatformCircle(angleRight - partWidth, radius + random.nextDouble() * 30 + 10, random.nextDouble() * 10 + 15, r, g, b));
     circles.shuffle();
   }
 
   void draw() {
+    if (type == 1) {
+      num a1 = angleLeft + (angleRight - angleLeft) / 2 - 0.02 + world.offsetAngle;
+      num a2 = a1 + 0.04;
+      num r = radius + 25;
+      bufferContext.fillStyle = '#5B4220';
+      bufferContext.beginPath();
+      bufferContext.moveTo(world.centerX + cos(a1) * r, world.centerY + sin(a1) * r);
+      bufferContext.lineTo(world.centerX + cos(a2) * r, world.centerY + sin(a2) * r);
+      bufferContext.lineTo(world.centerX + cos(a2) * world.radius, world.centerY + sin(a2) * world.radius);
+      bufferContext.lineTo(world.centerX + cos(a1) * world.radius, world.centerY + sin(a1) * world.radius);
+      bufferContext.closePath();
+      bufferContext.fill();
+    }
     for (int i = 0; i < circles.length; i++) {
       circles[i].draw();
     }
@@ -53,7 +78,8 @@ class PlatformCircle {
   void draw() {
     bufferContext.beginPath();
     bufferContext.fillStyle = color;
-    bufferContext.arc(cos(angle) * radius + world.centerX, sin(angle) * radius + world.centerY, radiusCircle, 0, 2 * PI);
+    bufferContext.arc(cos(angle + world.offsetAngle) * radius + world.centerX, sin(angle + world.offsetAngle) * radius + world.centerY, radiusCircle, 0, 2 * PI);
+    bufferContext.closePath();
     bufferContext.fill();
   }
 
