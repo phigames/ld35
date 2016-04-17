@@ -2,11 +2,13 @@ part of hubris;
 
 class Input {
 
-  bool leftKey, rightKey, upKey;
+  bool leftKey, rightKey, upKey, spaceKey;
 
-  void initInput(){
+  void initInput() {
     leftKey = false;
     rightKey = false;
+    upKey = false;
+    spaceKey = false;
   }
 
   void onKeyDown(KeyboardEvent event) {
@@ -16,6 +18,8 @@ class Input {
       rightKey = true;
     } else if (event.keyCode == KeyCode.UP || event.keyCode == KeyCode.W) {
       upKey = true;
+    } else if (event.keyCode == KeyCode.SPACE) {
+      spaceKey = true;
     }
   }
 
@@ -26,6 +30,8 @@ class Input {
       rightKey = false;
     } else if (event.keyCode == KeyCode.UP || event.keyCode == KeyCode.W) {
       upKey = false;
+    } else if (event.keyCode == KeyCode.SPACE) {
+      spaceKey = false;
     }
   }
 

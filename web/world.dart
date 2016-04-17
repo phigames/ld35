@@ -11,7 +11,7 @@ class World {
   World() {
     radius = 800;
     centerX = screenWidth / 2;
-    centerY = screenHeight * 0.75 - radius;
+    centerY = screenHeight / 2 - 620;
     offsetAngle = 0;
     platforms = new List<Platform>();
     platforms.add(new Platform(PI/2, PI/2 + 0.2, 700));

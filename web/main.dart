@@ -7,12 +7,14 @@ part 'world.dart';
 part 'player.dart';
 part 'platform.dart';
 part 'input.dart';
+part 'gamestate.dart';
+part 'resources.dart';
 
 int screenWidth, screenHeight;
 CanvasElement canvas, buffer;
 CanvasRenderingContext2D canvasContext, bufferContext;
 Random random;
-World world;
+GameState gameState;
 Input input;
 num lastUpdate;
 
@@ -24,22 +26,23 @@ void main() {
   canvasContext = canvas.context2D;
   bufferContext = buffer.context2D;
   random = new Random();
-  world = new World();
+  gameState = new LoadingState();
   input = new Input();
   input.initInput();
   window.onKeyDown.listen(input.onKeyDown);
   window.onKeyUp.listen(input.onKeyUp);
   lastUpdate = -1;
+  Resources.load();
   requestFrame();
 }
 
 void update() {
-  world.update();
+  gameState.update();
 }
 
 void draw() {
   bufferContext.clearRect(0, 0, screenWidth, screenHeight);
-  world.draw();
+  gameState.draw();
   canvasContext.clearRect(0, 0, screenWidth, screenHeight);
   canvasContext.drawImage(buffer, 0, 0);
 }
