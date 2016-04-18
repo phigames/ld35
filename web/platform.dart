@@ -6,8 +6,9 @@ class Platform {
   num radius;
   List<PlatformCircle> circles;
   int type;
+  bool lightning;
 
-  Platform(this.angleLeft, this.angleRight, this.radius, this.type) {
+  Platform(this.angleLeft, this.angleRight, this.radius, this.type, this.lightning) {
     circles = new List<PlatformCircle>();
     num platformWidth = angleRight - angleLeft;
     num partWidth = 0.04;
@@ -29,6 +30,12 @@ class Platform {
     }
     circles.add(new PlatformCircle(angleRight - partWidth, radius + random.nextDouble() * 30 + 10, random.nextDouble() * 10 + 15, r, g, b));
     circles.shuffle();
+  }
+
+  void onLand() {
+    if (lightning && world.lightning == null) {
+      world.lightning = new Lightning(world.player.angle, world.player.radius);
+    }
   }
 
   void draw() {

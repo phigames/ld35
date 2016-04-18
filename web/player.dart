@@ -7,7 +7,7 @@ class Player {
   num width = 20, height = 20;
   num velocityX = 0, velocityY = 0;
   bool onGround = false;
-  Platform groundPlatform;
+  num hitTime = 0;
 
   Player(this.angle, this.radius) {
 
@@ -30,23 +30,30 @@ class Player {
       }
     }
     onGround = false;
-    for (int i = 0; i < world.platforms.length; i++) {
-      if (angle % (2 * PI) >= world.platforms[i].angleLeft % (2 * PI) && angle % (2 * PI) <= world.platforms[i].angleRight % (2 * PI) &&
-          ((radius < world.platforms[i].radius && radius + velocityY >= world.platforms[i].radius) || (radius == world.platforms[i].radius && velocityY == 0))) {
-        radius = world.platforms[i].radius;
-        velocityY = 0;
-        onGround = true;
-        break;
+    if (hitTime == 0) {
+      for (int i = 0; i < world.platforms.length; i++) {
+        if (angle % (2 * PI) >= world.platforms[i].angleLeft % (2 * PI) && angle % (2 * PI) <= world.platforms[i].angleRight % (2 * PI) &&
+            ((radius < world.platforms[i].radius && radius + velocityY >= world.platforms[i].radius) ||
+                (radius == world.platforms[i].radius && velocityY == 0))) {
+          radius = world.platforms[i].radius;
+          velocityY = 0;
+          onGround = true;
+          world.platforms[i].onLand();
+          break;
+        }
       }
-    }
-    for (int i = 0; i < world.stones.length; i++) {
-      if (angleDifference(angle, world.stones[i].angle).abs() <= world.stones[i].size / radius &&
-          ((radius < world.stones[i].radius - world.stones[i].size && radius + velocityY >= world.stones[i].radius - world.stones[i].size) || (radius == world.stones[i].radius - world.stones[i].size && velocityY == 0))) {
-        radius = world.stones[i].radius - world.stones[i].size;
-        velocityY = 0;
-        onGround = true;
-        break;
+      for (int i = 0; i < world.stones.length; i++) {
+        if (angleDifference(angle, world.stones[i].angle).abs() <= world.stones[i].size / radius &&
+            ((radius < world.stones[i].radius - world.stones[i].size && radius + velocityY >= world.stones[i].radius - world.stones[i].size) ||
+                (radius == world.stones[i].radius - world.stones[i].size && velocityY == 0))) {
+          radius = world.stones[i].radius - world.stones[i].size;
+          velocityY = 0;
+          onGround = true;
+          break;
+        }
       }
+    } else {
+      hitTime--;
     }
     if (radius + velocityY >= world.radius) {
       radius = world.radius;
@@ -60,7 +67,11 @@ class Player {
   }
 
   void draw() {
+    if (hitTime > 0 && hitTime % 20 < 10) {
+      bufferContext.globalAlpha = 0.5;
+    }
     bufferContext.fillStyle = '#FFF';
     bufferContext.fillRect(cos(angle + world.offsetAngle) * radius + world.centerX - width / 2, sin(angle + world.offsetAngle) * radius + world.centerY - height, width, height);
+    bufferContext.globalAlpha = 1;
   }
 }

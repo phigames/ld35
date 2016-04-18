@@ -6,8 +6,10 @@ class World {
   num centerX, centerY;
   num offsetAngle;
   List<Platform> platforms;
+  List<Block> blocks;
   Player player;
   List<Stone> stones;
+  Lightning lightning;
 
   World() {
     radius = 800;
@@ -15,8 +17,11 @@ class World {
     centerY = screenHeight / 2 - 620;
     offsetAngle = 0;
     platforms = new List<Platform>();
-    platforms.add(new Platform(PI / 2, PI / 2 + 0.2, 700, 1));
-    platforms.add(new Platform(PI / 2 - 0.2, PI / 2 - 0.1, 600, 1));
+    platforms.add(new Platform(PI / 2, PI / 2 + 0.2, 700, 1, false));
+    platforms.add(new Platform(PI / 2 - 0.2, PI / 2 - 0.1, 600, 1, false));
+    platforms.add(new Platform(PI / 2 - 0.1, PI / 2 + 0.2, 600, 2, true));
+    blocks = new List<Block>();
+    //blocks.add(new Block(PI / 2 + 0.3, PI / 2 + 0.4, 750, 800));
     player = new Player(PI/2, radius);
     stones = new List<Stone>();
     stones.add(new Stone(0, radius, 50));
@@ -33,6 +38,12 @@ class World {
     for (int i = 0; i < stones.length; i++) {
       stones[i].update();
     }
+    if (lightning != null) {
+      lightning.update();
+      if (lightning.progress >= 1) {
+        lightning = null;
+      }
+    }
   }
 
   void draw() {
@@ -46,9 +57,15 @@ class World {
     for (int i = 0; i < platforms.length; i++) {
       platforms[i].draw();
     }
+    for (int i = 0; i < blocks.length; i++) {
+      blocks[i].draw();
+    }
     player.draw();
     for (int i = 0; i < stones.length; i++) {
       stones[i].draw();
+    }
+    if (lightning != null) {
+      lightning.draw();
     }
   }
 

@@ -19,7 +19,8 @@ class LoadingState extends GameState {
       bufferContext.fillStyle = '#000';
       bufferContext.fillText('loading...', 100, 100);
     } else {
-      gameState = new IntroState();
+      //gameState = new IntroState();
+      gameState = new WorldState();
     }
   }
 
@@ -38,7 +39,7 @@ class IntroState extends GameState {
   num fogTime = 0;
 
   IntroState() {
-    //Resources.sounds['music'].play();
+    Resources.sounds['loop1'].play();
   }
 
   void update() {
@@ -73,6 +74,11 @@ class IntroState extends GameState {
       bufferContext.fillStyle = '#FFF';
       bufferContext.font = 'bold 30px Forum';
       bufferContext.fillText('Until the year 631 B.C., humans had lived on Earth peacefully.', 28, 50);
+      if (phaseTime % 70 > 30) {
+        bufferContext.fillStyle = '#FFF';
+        bufferContext.font = 'bold 20px Forum';
+        bufferContext.fillText('press [SPACE] to continue', 580, 435);
+      }
 
 
     } else if (phase == 1) {
@@ -318,6 +324,7 @@ class IntroState extends GameState {
       bufferContext.arc(screenWidth / 2, screenHeight / 2 - min(phaseTime, 100) * 6.2, 100 + min(phaseTime, 100) * 7, 0, 2 * PI);
       bufferContext.closePath();
       bufferContext.fill();
+      Resources.sounds['loop1'].volume = max(1 - phaseTime / 100, 0);
       if (phaseTime > 100) {
         gameState = new WorldState();
       }
@@ -330,6 +337,8 @@ class WorldState extends GameState {
 
   WorldState() {
     world = new World();
+    Resources.sounds['loop1'].pause();
+    //Resources.sounds['loop2'].play();
   }
 
   void update() {
