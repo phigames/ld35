@@ -351,3 +351,157 @@ class WorldState extends GameState {
   }
 
 }
+
+class OutroState extends GameState {
+
+  ImageElement cloudsIn = Resources.images['clouds_in'];
+  ImageElement cloudsOut = Resources.images['clouds_out'];
+  ImageElement god = Resources.images['god'];
+  ImageElement hero = Resources.images['hero'];
+  int phase = 0;
+  int phaseTime = 0;
+  num fogTime = 0;
+
+  OutroState() {
+    Resources.sounds['loop2'].pause();
+    Resources.sounds['loop1'].currentTime = 0;
+    Resources.sounds['loop1'].play();
+  }
+
+  void update() {
+    phaseTime++;
+    fogTime++;
+    if (input.spaceKey) {
+      if (phase < 4) {
+        phase++;
+        phaseTime = 0;
+        input.spaceKey = false;
+      }
+    }
+  }
+
+  void draw() {
+    if (phase == 0) {
+      bufferContext.fillStyle = '#A06239';
+      bufferContext.fillRect(0, 0, screenWidth, screenHeight);
+      bufferContext.fillStyle = '#4FB8FF';
+      bufferContext.beginPath();
+      bufferContext.arc(screenWidth / 2, screenHeight / 2, max((100 - phaseTime) * 10, 100), 0, 2 * PI);
+      bufferContext.closePath();
+      bufferContext.fill();
+      if (phaseTime > 100) {
+        bufferContext.save();
+        bufferContext.translate(screenWidth / 2, screenHeight / 2);
+        bufferContext.rotate(fogTime / 500);
+        bufferContext.translate(-75, -75);
+        bufferContext.drawImage(cloudsIn, 0, 0);
+        bufferContext.restore();
+      }
+      if (phaseTime % 70 > 30) {
+        bufferContext.fillStyle = '#FFF';
+        bufferContext.font = 'bold 20px Forum';
+        bufferContext.fillText('press [SPACE] to continue', 580, 435);
+      }
+
+
+    } else if (phase == 1) {
+      bufferContext.fillStyle = '#A06239';
+      bufferContext.fillRect(0, 0, screenWidth, screenHeight);
+      bufferContext.fillStyle = '#4FB8FF';
+      bufferContext.beginPath();
+      bufferContext.arc(screenWidth / 2, screenHeight / 2, 100, 0, 2 * PI);
+      bufferContext.closePath();
+      bufferContext.fill();
+      bufferContext.save();
+      bufferContext.translate(screenWidth / 2, screenHeight / 2);
+      bufferContext.rotate(fogTime / 500);
+      bufferContext.translate(-75, -75);
+      bufferContext.drawImage(cloudsIn, 0, 0);
+      bufferContext.restore();
+      bufferContext.drawImage(god, max(screenWidth - phaseTime * 6, screenWidth - 300), screenHeight - 300);
+      bufferContext.drawImage(hero, min(phaseTime * 6 - 300, 0), screenHeight - 300);
+
+
+    } else if (phase == 2) {
+      bufferContext.fillStyle = '#A06239';
+      bufferContext.fillRect(0, 0, screenWidth, screenHeight);
+      bufferContext.fillStyle = '#4FB8FF';
+      bufferContext.beginPath();
+      bufferContext.arc(screenWidth / 2, screenHeight / 2, 100, 0, 2 * PI);
+      bufferContext.closePath();
+      bufferContext.fill();
+      bufferContext.save();
+      bufferContext.translate(screenWidth / 2, screenHeight / 2);
+      bufferContext.rotate(fogTime / 500);
+      bufferContext.translate(-75, -75);
+      bufferContext.drawImage(cloudsIn, 0, 0);
+      bufferContext.restore();
+      bufferContext.globalAlpha = max((100 - phaseTime) / 100, 0);
+      bufferContext.drawImage(god, screenWidth - 300, screenHeight - 300);
+      bufferContext.globalAlpha = 1;
+      bufferContext.drawImage(hero, 0, screenHeight - 300);
+
+
+    } else if (phase == 3) {
+      if (phaseTime <= 50) {
+        bufferContext.fillStyle = '#A06239';
+        bufferContext.fillRect(0, 0, screenWidth, screenHeight);
+        bufferContext.fillStyle = '#4FB8FF';
+        bufferContext.beginPath();
+        num t = phaseTime * phaseTime * 0.2;
+        bufferContext.arc(screenWidth / 2, screenHeight / 2 + t * 20.2, 100 + t * 20, 0, 2 * PI);
+        bufferContext.closePath();
+        bufferContext.fill();
+      } else if (phaseTime <= 100) {
+        bufferContext.fillStyle = '#4FB8FF';
+        bufferContext.fillRect(0, 0, screenWidth, screenHeight);
+        bufferContext.fillStyle = '#A06239';
+        bufferContext.beginPath();
+        num t = (100 - phaseTime) * (100 - phaseTime) * 0.2;
+        bufferContext.arc(screenWidth / 2, screenHeight / 2 - t * 20.2, 100 + t * 20, 0, 2 * PI);
+        bufferContext.closePath();
+        bufferContext.fill();
+      } else {
+        bufferContext.fillStyle = '#4FB8FF';
+        bufferContext.fillRect(0, 0, screenWidth, screenHeight);
+        bufferContext.fillStyle = '#A06239';
+        bufferContext.beginPath();
+        bufferContext.arc(screenWidth / 2, screenHeight / 2, 100, 0, 2 * PI);
+        bufferContext.closePath();
+        bufferContext.fill();
+        bufferContext.save();
+        bufferContext.translate(screenWidth / 2, screenHeight / 2);
+        bufferContext.rotate(fogTime / 500);
+        bufferContext.translate(-160, -160);
+        bufferContext.drawImage(cloudsOut, 0, 0);
+        bufferContext.restore();
+      }
+      bufferContext.drawImage(hero, -phaseTime * 6, screenHeight - 300);
+
+
+    } else if (phase == 4) {
+      bufferContext.fillStyle = '#4FB8FF';
+      bufferContext.fillRect(0, 0, screenWidth, screenHeight);
+      bufferContext.fillStyle = '#A06239';
+      bufferContext.beginPath();
+      bufferContext.arc(screenWidth / 2, screenHeight / 2, 100, 0, 2 * PI);
+      bufferContext.closePath();
+      bufferContext.fill();
+      bufferContext.save();
+      bufferContext.translate(screenWidth / 2, screenHeight / 2);
+      bufferContext.rotate(fogTime / 500);
+      bufferContext.translate(-160, -160);
+      bufferContext.drawImage(cloudsOut, 0, 0);
+      bufferContext.restore();
+      bufferContext.globalAlpha = min(phaseTime / 200, 1);
+      bufferContext.fillStyle = '#FFF';
+      bufferContext.fillRect(0, 0, screenWidth, screenHeight);
+      bufferContext.globalAlpha = min(max((phaseTime - 400) / 200, 0), 1);
+      bufferContext.fillStyle = '#CCC';
+      bufferContext.font = 'bold 50px Forum';
+      bufferContext.fillText('Thank you for playing.', 175, 180);
+      bufferContext.globalAlpha = 1;
+    }
+  }
+
+}
