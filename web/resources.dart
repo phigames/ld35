@@ -18,8 +18,11 @@ class Resources {
     images['walk'] = new ImageElement(src: 'res/walk.png')..onLoad.first.then((e) => imagesLoaded++);
     images['god_small'] = new ImageElement(src: 'res/god_small.png')..onLoad.first.then((e) => imagesLoaded++);
     images['lightning'] = new ImageElement(src: 'res/lightning.png')..onLoad.first.then((e) => imagesLoaded++);
+    images['stone'] = new ImageElement(src: 'res/stone.png')..onLoad.first.then((e) => imagesLoaded++);
+    images['horse'] = new ImageElement(src: 'res/horse.png')..onLoad.first.then((e) => imagesLoaded++);
     sounds['loop1'] = new AudioElement('res/loop1.wav')..onLoadedData.first.then((e) => soundsLoaded++)..loop = true;
     sounds['loop2'] = new AudioElement('res/loop2.wav')..onLoadedData.first.then((e) => soundsLoaded++)..loop = true;
+    sounds['thunder'] = new AudioElement('res/thunder.wav')..onLoadedData.first.then((e) => soundsLoaded++);
   }
 
   static bool allLoaded() {
