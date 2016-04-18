@@ -35,6 +35,11 @@ class World {
     } else if (player.angle + offsetAngle < PI / 2 - 0.2) {
       offsetAngle = PI / 2 - 0.2 - player.angle;
     }
+    if (player.radius + world.centerY > 400) {
+      centerY = 400 - player.radius;
+    } else if (player.radius + centerY < 100) {
+      centerY = 100 - player.radius;
+    }
     for (int i = 0; i < stones.length; i++) {
       stones[i].update();
     }

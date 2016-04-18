@@ -15,6 +15,7 @@ class Resources {
     images['fog'] = new ImageElement(src: 'res/fog.png')..onLoad.first.then((e) => imagesLoaded++);
     images['god'] = new ImageElement(src: 'res/god.png')..onLoad.first.then((e) => imagesLoaded++);
     images['hero'] = new ImageElement(src: 'res/hero.png')..onLoad.first.then((e) => imagesLoaded++);
+    images['walk'] = new ImageElement(src: 'res/walk.png')..onLoad.first.then((e) => imagesLoaded++);
     images['god_small'] = new ImageElement(src: 'res/god_small.png')..onLoad.first.then((e) => imagesLoaded++);
     images['lightning'] = new ImageElement(src: 'res/lightning.png')..onLoad.first.then((e) => imagesLoaded++);
     sounds['loop1'] = new AudioElement('res/loop1.wav')..onLoadedData.first.then((e) => soundsLoaded++)..loop = true;

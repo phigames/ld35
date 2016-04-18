@@ -4,13 +4,16 @@ class Player {
 
   num angle;
   num radius;
-  num width = 20, height = 20;
+  num width = 95, height = 118;
   num velocityX = 0, velocityY = 0;
   bool onGround = false;
   num hitTime = 0;
+  ImageElement image;
+  int frame = 0;
+  int frameTime = 0;
 
   Player(this.angle, this.radius) {
-
+    image = Resources.images['walk'];
   }
 
   void update() {
@@ -64,14 +67,28 @@ class Player {
       velocityY = -10;
     }
     radius += velocityY;
+    if (velocityX != 0) {
+      frameTime++;
+      if (frameTime > 5) {
+        frame++;
+        if (frame > 5) {
+          frame = 1;
+        }
+        frameTime = 0;
+      }
+    } else {
+      frame = 0;
+    }
   }
 
   void draw() {
     if (hitTime > 0 && hitTime % 20 < 10) {
       bufferContext.globalAlpha = 0.5;
     }
-    bufferContext.fillStyle = '#FFF';
-    bufferContext.fillRect(cos(angle + world.offsetAngle) * radius + world.centerX - width / 2, sin(angle + world.offsetAngle) * radius + world.centerY - height, width, height);
+    //bufferContext.fillStyle = '#FFF';
+    //bufferContext.fillRect(cos(angle + world.offsetAngle) * radius + world.centerX - width / 2, sin(angle + world.offsetAngle) * radius + world.centerY - height, width, height);
+    bufferContext.drawImageToRect(image, new Rectangle<num>(cos(angle + world.offsetAngle) * radius + world.centerX - width / 2, sin(angle + world.offsetAngle) * radius + world.centerY - height, width, height),
+        sourceRect: velocityX > 0 ? new Rectangle<num>(frame * width, height, width, height) : new Rectangle<num>(frame * width, 0, width, height));
     bufferContext.globalAlpha = 1;
   }
 }
