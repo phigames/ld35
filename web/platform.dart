@@ -6,9 +6,13 @@ class Platform {
   num radius;
   List<PlatformCircle> circles;
   int type;
+  bool god;
   bool lightning;
+  ImageElement godImage;
+  int godTime;
+  bool onGround;
 
-  Platform(this.angleLeft, this.angleRight, this.radius, this.type, this.lightning) {
+  Platform(this.angleLeft, this.angleRight, this.radius, this.type, this.god, this.lightning) {
     circles = new List<PlatformCircle>();
     num platformWidth = angleRight - angleLeft;
     num partWidth = 0.04;
@@ -25,17 +29,21 @@ class Platform {
     }
     for (int i = 0; i < parts; i++) { // parts
       for (int j = 0; j < 2; j++) { // n circles
-        circles.add(new PlatformCircle(angleLeft + partWidth * i + partWidth / 2, radius + random.nextDouble() * 30 + 10, random.nextDouble() * 10 + 15, r, g, b));
+        circles.add(new PlatformCircle(angleLeft + partWidth * i + partWidth / 2, radius + random.nextDouble() * 40, random.nextDouble() * 10 + 15, r, g, b));
       }
     }
     circles.add(new PlatformCircle(angleRight - partWidth, radius + random.nextDouble() * 30 + 10, random.nextDouble() * 10 + 15, r, g, b));
     circles.shuffle();
+    godImage = Resources.images['god_small'];
+    godTime = -1;
+    onGround = false;
   }
 
   void onLand() {
     if (lightning && world.lightning == null) {
       world.lightning = new Lightning(world.player.angle, world.player.radius);
     }
+    onGround = true;
   }
 
   void draw() {
@@ -55,7 +63,23 @@ class Platform {
     for (int i = 0; i < circles.length; i++) {
       circles[i].draw();
     }
+    if (god) {
+      if (onGround) {
+        godTime++;
+        if (godTime > 50) {
+          godTime = 50;
+        }
+      } else {
+        godTime--;
+        if (godTime < 0) {
+          godTime = 0;
+        }
+      }
+      onGround = false;
+      bufferContext.drawImage(godImage, 800 - godTime * 2, -100);
+    }
   }
+
 }
 
 class PlatformCircle {

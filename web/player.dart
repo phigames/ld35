@@ -19,12 +19,12 @@ class Player {
   void update() {
     velocityX = 0;
     if (input.rightKey) {
-      velocityX = -0.01;
+      velocityX = -0.008;
     } else if (input.leftKey) {
-      velocityX = 0.01;
+      velocityX = 0.008;
     }
     if (!onGround) {
-      velocityY += 0.5;
+      velocityY += 0.8;
     }
     angle += velocityX;
     for (int i = 0; i < world.stones.length; i++) {
@@ -64,7 +64,7 @@ class Player {
       onGround = true;
     }
     if (onGround && input.upKey) {
-      velocityY = -10;
+      velocityY = -12;
     }
     radius += velocityY;
     if (velocityX != 0) {

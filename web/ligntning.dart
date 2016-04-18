@@ -14,7 +14,7 @@ class Lightning {
   }
 
   void update() {
-    progress += 0.1;
+    progress += 0.07;
     if (progress >= 1) {
       world.player.hitTime = 60;
     }

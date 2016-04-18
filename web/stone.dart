@@ -17,7 +17,7 @@ class Stone {
   }
 
   void update() {
-    velocity *= 0.98;
+    velocity *= 0.96;
     if (velocity.abs() < 0.001) {
       velocity = 0;
     }

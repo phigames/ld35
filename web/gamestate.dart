@@ -17,10 +17,11 @@ class LoadingState extends GameState {
   void draw() {
     if (!Resources.allLoaded()) {
       bufferContext.fillStyle = '#000';
-      bufferContext.fillText('loading...', 100, 100);
+      bufferContext.font = '50px Forum';
+      bufferContext.fillText('loading...', 300, 200);
     } else {
-      //gameState = new IntroState();
-      gameState = new WorldState();
+      gameState = new IntroState();
+      //gameState = new WorldState();
     }
   }
 
@@ -338,7 +339,7 @@ class WorldState extends GameState {
   WorldState() {
     world = new World();
     Resources.sounds['loop1'].pause();
-    //Resources.sounds['loop2'].play();
+    Resources.sounds['loop2'].play();
   }
 
   void update() {
