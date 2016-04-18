@@ -15,11 +15,12 @@ class World {
     centerY = screenHeight / 2 - 620;
     offsetAngle = 0;
     platforms = new List<Platform>();
-    platforms.add(new Platform(PI/2, PI/2 + 0.2, 700, 1));
-    platforms.add(new Platform(PI/2 - 0.2, PI/2 - 0.1, 600, 1));
+    platforms.add(new Platform(PI / 2, PI / 2 + 0.2, 700, 1));
+    platforms.add(new Platform(PI / 2 - 0.2, PI / 2 - 0.1, 600, 1));
     player = new Player(PI/2, radius);
     stones = new List<Stone>();
     stones.add(new Stone(0, radius, 50));
+    stones.add(new Stone(PI / 4, radius, 30));
   }
 
   void update() {

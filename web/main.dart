@@ -37,6 +37,16 @@ void main() {
   requestFrame();
 }
 
+num angleDifference(num angle1, num angle2) {
+  num a2 = angle2 - angle1;
+  if (a2 > 0) {
+    a2 = a2 % (2 * PI);
+  } else {
+    a2 = -((-a2) % (2 * PI));
+  }
+  return a2;
+}
+
 void update() {
   gameState.update();
 }
