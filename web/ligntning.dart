@@ -11,6 +11,8 @@ class Lightning {
     targetRadius -= 120;
     progress = 0;
     image = Resources.images['lightning'];
+    Resources.sounds['thunder'].currentTime = 0;
+    Resources.sounds['thunder'].play();
   }
 
   void update() {

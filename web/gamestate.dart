@@ -68,7 +68,7 @@ class IntroState extends GameState {
       bufferContext.fill();
       bufferContext.save();
       bufferContext.translate(screenWidth / 2, screenHeight / 2);
-      //bufferContext.rotate(fogTime / 100);
+      bufferContext.rotate(fogTime / 500);
       bufferContext.translate(-160, -160);
       bufferContext.drawImage(cloudsOut, 0, 0);
       bufferContext.restore();
@@ -92,7 +92,7 @@ class IntroState extends GameState {
       bufferContext.fill();
       bufferContext.save();
       bufferContext.translate(screenWidth / 2, screenHeight / 2);
-      //bufferContext.rotate(fogTime / 100);
+      bufferContext.rotate(fogTime / 500);
       bufferContext.translate(-160, -160);
       bufferContext.drawImage(cloudsOut, 0, 0);
       bufferContext.restore();
@@ -171,7 +171,7 @@ class IntroState extends GameState {
       if (phaseTime > 100) {
         bufferContext.save();
         bufferContext.translate(screenWidth / 2, screenHeight / 2);
-        //bufferContext.rotate(fogTime / 100);
+        bufferContext.rotate(fogTime / 500);
         bufferContext.translate(-160, -160);
         bufferContext.drawImage(cloudsOut, 0, 0);
         bufferContext.restore();
@@ -197,7 +197,7 @@ class IntroState extends GameState {
       } else {
         bufferContext.save();
         bufferContext.translate(screenWidth / 2, screenHeight / 2);
-        //bufferContext.rotate(fogTime / 100);
+        bufferContext.rotate(fogTime / 500);
         bufferContext.translate(-160, -160);
         bufferContext.drawImage(cloudsOut, 0, 0);
         bufferContext.restore();
@@ -236,7 +236,7 @@ class IntroState extends GameState {
         bufferContext.fill();
         bufferContext.save();
         bufferContext.translate(screenWidth / 2, screenHeight / 2);
-        //bufferContext.rotate(fogTime / 100);
+        bufferContext.rotate(fogTime / 500);
         bufferContext.translate(-75, -75);
         bufferContext.drawImage(cloudsIn, 0, 0);
         bufferContext.restore();
@@ -258,7 +258,7 @@ class IntroState extends GameState {
       bufferContext.fill();
       bufferContext.save();
       bufferContext.translate(screenWidth / 2, screenHeight / 2);
-      //bufferContext.rotate(fogTime / 100);
+      bufferContext.rotate(fogTime / 500);
       bufferContext.translate(-75, -75);
       bufferContext.drawImage(cloudsIn, 0, 0);
       bufferContext.restore();
@@ -279,7 +279,7 @@ class IntroState extends GameState {
       bufferContext.fill();
       bufferContext.save();
       bufferContext.translate(screenWidth / 2, screenHeight / 2);
-      //bufferContext.rotate(fogTime / 100);
+      bufferContext.rotate(fogTime / 500);
       bufferContext.translate(-75, -75);
       bufferContext.drawImage(cloudsIn, 0, 0);
       bufferContext.restore();
@@ -303,7 +303,7 @@ class IntroState extends GameState {
       bufferContext.fill();
       bufferContext.save();
       bufferContext.translate(screenWidth / 2, screenHeight / 2);
-      //bufferContext.rotate(fogTime / 100);
+      bufferContext.rotate(fogTime / 500);
       bufferContext.translate(-75, -75);
       bufferContext.drawImage(cloudsIn, 0, 0);
       bufferContext.restore();
