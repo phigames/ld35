@@ -7,18 +7,29 @@ html, body {
     padding: 0;
     background-color: #D6D6D6;
     font-family: 'Forum', serif;
+    color: #666666;
 }
 
 h1 {
-    font-size: 35px;
-    padding: 0px;
+    margin: 0px;
+    font-size: 40px;
 }
 
 .main {
+    border: 2px bold;
+    border-radius: 3px;
     width: 800px;
-    margin: 8px auto 0 auto;
-    padding: 4px 4px 0 4px;
+    margin: 10px auto 0 auto;
+    padding: 5px 5px 0 5px;
     background-color: #A0A0A0;
     text-align: center;
 }
 
+#header {
+    height: 50px;
+}
+
+#footer {
+    color: #DBDBDB;
+    height: 25px;
+}
